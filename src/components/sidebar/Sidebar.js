@@ -4,7 +4,6 @@ import './sidebar.scss';
 
 export const Sidebar = () => {
     const {state} = useContext(RateContext);
-    console.log(state);
 
     return(
         <section className = 'sidebar'>
