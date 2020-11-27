@@ -1,5 +1,6 @@
 import React from 'react';
 import './header.scss';
+import { NavLink } from 'react-router-dom'
 import { AddClass } from '../../hoc/AddClass';
 import { Navbar } from '../navbar/Navbar';
 
@@ -10,7 +11,7 @@ const Header = () => {
             <div className = 'headerWrap'>
                 <div className = 'logo'>
                     <h2>
-                        <a href="/">RateApp</a>
+                        <NavLink exact to="/">RateApp</NavLink>
                     </h2>
                 </div>
                 <nav className = 'navbar'>
