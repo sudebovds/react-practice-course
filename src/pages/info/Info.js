@@ -4,8 +4,11 @@ import './info.scss';
 export const Info = () => {
 
     return(
-        <div>
-            <h1>Information</h1>
+        <div className = 'info'>
+            <h3>Currency conversion application</h3>
+            <p>
+                Autor: Mit Sudebov by V. Minin course.
+            </p>
         </div>
     );
 }
