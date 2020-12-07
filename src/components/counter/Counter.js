@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { RateContext } from '../../context/RateContext';
+import { Button } from '../button/Button';
 import './counter.scss';
 
 export const Counter = () => {
@@ -29,7 +30,14 @@ export const Counter = () => {
                             })
                     }
                 </select>
-                <button onClick = {() => calculatorHandler(state.currencyValue)}>Calculate</button>
+                <Button
+                    text='Calculate'
+                    click = { calculatorHandler }
+                    arg = {state.currencyValue}
+                />
+                {
+                    /*<button onClick = {() => calculatorHandler(state.currencyValue)}>Calculate</button>*/
+                }
             </div>
         </div>
     );
