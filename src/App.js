@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import './App.scss';
 import { RateContext } from './context/RateContext';
 import Layout from './components/Layout/Layout';
@@ -61,8 +62,39 @@ class App extends React.Component{
 
       inputValue: 100,
       currencyValue: 'USD',
-      result: null
+      result: null,
+
+      //smaple
+
+      sample: {base1: 'RUB', base2: 'USD', date: ''},
+      sampleList: ''
     }
+  }
+
+  base1Handler = (event) => {
+    this.setState({sample: {...this.state.sample, base1: event.target.value}})
+  }
+  
+  base2Handler = (event) => {
+    this.setState({sample: {...this.state.sample, base2: event.target.value}})
+  }
+
+  sampleDateHandler = (event) => {
+    this.setState({sample: {...this.state.sample, date: event.target.value}})
+  }
+
+  dataWrite = async (sample) => {
+    await axios.post('https://rateapp-40e37-default-rtdb.europe-west1.firebasedatabase.app/sample.json', sample)
+      .then((response) => {
+        return('');
+      });
+
+    await axios.get('https://rateapp-40e37-default-rtdb.europe-west1.firebasedatabase.app/sample.json')
+      .then((response) => {
+        this.setState({
+          sampleList: response.data
+        })
+      })
   }
 
   inputValueHandler = (event) => {
@@ -122,7 +154,11 @@ class App extends React.Component{
           state: this.state, 
           inputValueHandler: this.inputValueHandler, 
           currencyValueHandler: this.currencyValueHandler,
-          calculatorHandler: this.calculatorHandler
+          calculatorHandler: this.calculatorHandler,
+          base1Handler: this.base1Handler,
+          base2Handler: this.base2Handler,
+          sampleDateHandler: this.sampleDateHandler,
+          dataWrite: this.dataWrite
           }}>
         <Layout />
       </RateContext.Provider>
