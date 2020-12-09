@@ -66,7 +66,7 @@ class App extends React.Component{
 
       //smaple
 
-      sample: {base1: 'RUB', base2: 'USD', date: ''},
+      sample: {base1: 'USD', base2: 'RUB', date: '', cours: ''},
       sampleList: ''
     }
   }
@@ -83,8 +83,14 @@ class App extends React.Component{
     this.setState({sample: {...this.state.sample, date: event.target.value}})
   }
 
-  dataWrite = async (sample) => {
-    await axios.post('https://rateapp-40e37-default-rtdb.europe-west1.firebasedatabase.app/sample.json', sample)
+  dataWrite = async () => {
+    await fetch(`https://api.exchangeratesapi.io/${this.state.sample.date}?base=${this.state.sample.base1}`)
+      .then((response) => response.json())
+      .then((response) => {
+        this.setState({sample: {...this.state.sample, cours: response.rates[this.state.sample.base2]}})
+      })
+
+    await axios.post('https://rateapp-40e37-default-rtdb.europe-west1.firebasedatabase.app/sample.json', this.state.sample)
       .then((response) => {
         return('');
       });
@@ -95,6 +101,16 @@ class App extends React.Component{
           sampleList: response.data
         })
       })
+  }
+
+  sampleRemove = async (id) => {
+    let sampleList = {...this.state.sampleList};
+
+    delete sampleList[id];
+
+    this.setState({sampleList});
+
+    await axios.delete(`https://rateapp-40e37-default-rtdb.europe-west1.firebasedatabase.app/sample/${id}.json`)
   }
 
   inputValueHandler = (event) => {
@@ -144,6 +160,13 @@ class App extends React.Component{
         });
 
       });
+
+      axios.get('https://rateapp-40e37-default-rtdb.europe-west1.firebasedatabase.app/sample.json')
+      .then((response) => {
+        this.setState({
+          sampleList: response.data
+        })
+      })      
   }
 
   render(){
@@ -158,7 +181,8 @@ class App extends React.Component{
           base1Handler: this.base1Handler,
           base2Handler: this.base2Handler,
           sampleDateHandler: this.sampleDateHandler,
-          dataWrite: this.dataWrite
+          dataWrite: this.dataWrite,
+          sampleRemove: this.sampleRemove
           }}>
         <Layout />
       </RateContext.Provider>
