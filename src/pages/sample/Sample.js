@@ -5,7 +5,7 @@ import './sample.scss';
 
 export const Sample = () => {
 
-    const { state, base1Handler, base2Handler, sampleDateHandler, dataWrite } = useContext(RateContext);
+    const { state, base1Handler, base2Handler, sampleDateHandler, dataWrite, sampleRemove } = useContext(RateContext);
 
     return(
         <div className = 'sample'>
@@ -51,7 +51,39 @@ export const Sample = () => {
                 </div>
                 <div className = 'smapleResult'>
                     <ul>
+                        {
+                            Object.keys(state.sampleList)
+                                .map((item, i) => {
+                                    return(
+                                        <li key = {item}>
+                                            <span>
+                                                <img 
+                                                    src = {state.currency[state.sampleList[item].base1].flag}
+                                                    alt = {item}
+                                                />
+                                                &nbsp;
+                                                {
+                                                    state.sampleList[item].base1
+                                                }
+                                            </span>
+                                            <span>
+                                                {
+                                                    state.sampleList[item].date
+                                                }
+                                            </span>
+                                            <span>
+                                                {
+                                                    `${state.sampleList[item].cours} ${state.sampleList[item].base2}`
+                                                }
+                                            </span>
 
+                                            <button onClick = {() => sampleRemove(item)}>
+                                                <i className = 'fa fa-times'></i>
+                                            </button>
+                                        </li>
+                                    );
+                                })
+                        }
                     </ul>
                 </div>
             </div>            
