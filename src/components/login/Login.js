@@ -1,20 +1,21 @@
 import React, { Fragment } from 'react';
 import { Button } from '../button/Button';
+import { Input } from '../input/Input';
 import './login.scss';
 
 export const Login = () => {
     return(
         <Fragment>
             <div className = 'modalForm'>
-                <div className = 'modalInput'>
-                    <span>Sign in</span>
-                    <input type = 'text' />
-                </div>
+                <Input
+                    type = 'email'
+                    label = 'Email'
+                />
 
-                <div className = 'modalInput'>
-                    <span>Sign in</span>
-                    <input type = 'text' />
-                </div>                
+                <Input 
+                    type = 'password'
+                    label = 'Password'
+                />                
             </div>
             <div className = 'modalBtn'>
                 <Button text = 'Sign in' />
