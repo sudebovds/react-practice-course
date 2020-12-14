@@ -21,16 +21,8 @@ export const Input = (props) => {
                 value = {props.value}
                 onChange = {props.onChange}
             />
-
-            {
-                isInvalid(props) ? 
-                    <span>
-                        {props.errorMessage || 'Type right data.'}
-                    </span>
-                : 
-
-                null
-            }
+            
+            {isInvalid(props) ? <span style = {{color: '#f01f30'}}>{props.errorMessage || 'Type right value'}</span> : null}
 
         </div>
     );

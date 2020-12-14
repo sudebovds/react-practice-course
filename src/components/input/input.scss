@@ -1,3 +1,4 @@
+
 .modalInput{
     margin: 1vw auto;
     padding: .5vw;
@@ -5,10 +6,10 @@
     grid-template-columns: 1fr;
 
     label{
-        color: #223045;
-        font-family: 'Lato', sans-serif;
-        font-size: .7vw;
-        line-height: 1.5vw;
+        color: #223046;
+                font-family: 'Lato', sans-serif;
+                font-size: .7vw;
+                line-height: 1.5vw;
     }
 
     input{
@@ -22,8 +23,6 @@
     }
 }
 
-.inputInvalid{
-    label{
-        color: #f01f30;
-    }
+.inputInvalid label{
+    color: #f01f30;
 }
