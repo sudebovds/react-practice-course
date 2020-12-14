@@ -1,6 +1,10 @@
 import React from 'react';
 import './input.scss';
 
+function isInvalid({valid, toushed, shouldValidate}){
+    return !valid && toushed && shouldValidate
+}
+
 export const Input = (props) => {
     const cls = ['modalInput'];
     const inputType = props.tupr || 'text';
@@ -17,9 +21,17 @@ export const Input = (props) => {
                 value = {props.value}
                 onChange = {props.onChange}
             />
-            <span>
-                {props.errorMessage}
-            </span>
+
+            {
+                isInvalid(props) ? 
+                    <span>
+                        {props.errorMessage || 'Type right data.'}
+                    </span>
+                : 
+
+                null
+            }
+
         </div>
     );
 }

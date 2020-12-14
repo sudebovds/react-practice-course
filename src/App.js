@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.scss';
 import { RateContext } from './context/RateContext';
 import Layout from './components/Layout/Layout';
+import { Input } from './components/input/Input';
 
 import CHF from './images/CHF.png';
 import CNY from './images/CNY.png';
@@ -19,6 +20,34 @@ class App extends React.Component{
     super(props);
 
     this.state = {
+
+      formControls: {
+        email: {
+          value: '',
+          type: 'email',
+          label: 'Email',
+          errorMessage: 'Type the right Email!',
+          valid: false,
+          touched: false,
+          validation: {
+            required: true,
+            email: true
+          }
+        },
+        password: {
+          value: '',
+          type: 'password',
+          label: 'Password',
+          errorMessage: 'Type the right password',
+          valid: false,
+          touched: false,
+          validation: {
+            required: true,
+            minLength: 6
+          }
+        }
+      },
+
       base: 'USD',
       rate: '',
       date: '',
@@ -71,6 +100,33 @@ class App extends React.Component{
       sample: {base1: 'USD', base2: 'RUB', date: '', cours: ''},
       sampleList: ''
     }
+  }
+
+  onChangeHandler = (event, controlName) => {
+    console.log(`${controlName} - ${event.target.value}`);
+  }
+
+  renderInputs = () => {
+    return(
+      Object.keys(this.state.formControls)
+        .map((controlName, index) => {
+          const control = this.state.formControls[controlName];
+
+          return(
+            <Input 
+              key = {controlName + index}
+              type = {control.type}
+              value = {control.value}
+              valid = {control.valid}
+              touched = {control.touched}
+              label = {control.label}
+              errorMessage = {control.errorMessage}
+              shouldValidate = {true}
+              onChange = {(event) => this.onChangeHandler(event, controlName)}
+            />
+          );
+        })
+    );
   }
 
   base1Handler = (event) => {
@@ -184,7 +240,8 @@ class App extends React.Component{
           base2Handler: this.base2Handler,
           sampleDateHandler: this.sampleDateHandler,
           dataWrite: this.dataWrite,
-          sampleRemove: this.sampleRemove
+          sampleRemove: this.sampleRemove,
+          renderInputs: this.renderInputs
           }}>
 
         <Dark />
