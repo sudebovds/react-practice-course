@@ -12,10 +12,6 @@ export const Input = (props) => {
     const inputType = props.type || 'text';
     const htmlFor = `${props.type} - ${Math.random()}`;
 
-    {
-
-    }
-
     return(
         <div className = {cls.join(' ')}>
             <label htmlFor = {htmlFor}>
@@ -28,7 +24,13 @@ export const Input = (props) => {
                 onChange = {props.onChange}
             />
 
-            {isInvalid(props) ? <span style = {{color: '#f01f30'}}>{props.errorMessage || 'Type the correct value'}</span> : null}            
+            {
+                isInvalid(props) ? 
+                    <span style = {{color: '#f01f30'}}>
+                        {props.errorMessage || 'Type the correct value'}
+                    </span> 
+                : null
+                }            
             
         </div>
     );

@@ -12,7 +12,7 @@
     left: 0;
     right: 0;
     border-radius: 5px;
-   // display: none;
+    display: none;
 
     .modalHead{
         padding: 0.7vw;
@@ -51,4 +51,7 @@
             }
         }
     }
+}
+.modalShow{
+    display: block;
 }

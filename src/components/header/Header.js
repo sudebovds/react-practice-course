@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './header.scss';
 import { NavLink } from 'react-router-dom'
 import { AddClass } from '../../hoc/AddClass';
 import { Navbar } from '../navbar/Navbar';
+import { RateContext } from '../../context/RateContext';
 
 const Header = () => {
+
+    const {state, modalShowHandler} = useContext(RateContext);
 
     return (
         <header>
@@ -18,7 +21,7 @@ const Header = () => {
                     <Navbar />
                 </nav>
                 <div className = 'person'>
-                    <i className = "fa fa-user" aria-hidden = "true" />
+                    <i className = "fa fa-user" aria-hidden = "true" onClick = {modalShowHandler} />
                 </div>
             </div>
 
