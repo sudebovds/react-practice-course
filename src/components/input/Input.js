@@ -1,14 +1,20 @@
 import React from 'react';
 import './input.scss';
 
-function isInvalid({valid, toushed, shouldValidate}){
-    return !valid && toushed && shouldValidate
+function isInvalid({valid, touched, shouldValidate}){
+
+    return !valid && touched && shouldValidate
+
 }
 
 export const Input = (props) => {
     const cls = ['modalInput'];
-    const inputType = props.tupr || 'text';
+    const inputType = props.type || 'text';
     const htmlFor = `${props.type} - ${Math.random()}`;
+
+    {
+
+    }
 
     return(
         <div className = {cls.join(' ')}>
@@ -21,9 +27,9 @@ export const Input = (props) => {
                 value = {props.value}
                 onChange = {props.onChange}
             />
-            
-            {isInvalid(props) ? <span style = {{color: '#f01f30'}}>{props.errorMessage || 'Type right value'}</span> : null}
 
+            {isInvalid(props) ? <span style = {{color: '#f01f30'}}>{props.errorMessage || 'Type the correct value'}</span> : null}            
+            
         </div>
     );
 }
