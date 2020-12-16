@@ -107,7 +107,44 @@ class App extends React.Component{
 
       //modal
 
-      showModal: false
+      showModal: false,
+      isFormValid: false
+    }
+  }
+
+  loginHandler = async () => {
+
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value,
+      returnSecureToken: true
+    }
+
+    try{
+      const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDPIdXrLxg6PQj_xvmaileBLvZLOSgRUXg', authData);
+
+      console.log(response);
+    }
+    catch(e){
+      console.error(e);
+    }
+  }
+
+  registerHandler = async () => {
+
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value,
+      returnSecureToken: true
+    }
+
+    try{
+      const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDPIdXrLxg6PQj_xvmaileBLvZLOSgRUXg', authData);
+
+      console.log(response);
+    }
+    catch(e){
+      console.error(e);
     }
   }
 
@@ -151,8 +188,14 @@ class App extends React.Component{
     control.valid = this.validateControl(control.value, control.validation)
     
     formControls[controlName] = control
+
+    let isFormValid = true
+
+    Object.keys(formControls).forEach(name => {
+      isFormValid = formControls[name].valid && isFormValid
+    })
     
-    this.setState({formControls})
+    this.setState({formControls, isFormValid})
   }
 
   renderInputs = () => {
@@ -291,7 +334,9 @@ class App extends React.Component{
           sampleRemove: this.sampleRemove,
           renderInputs: this.renderInputs,
           modalShowHandler: this.modalShowHandler,
-          modalHideHandler: this.modalHideHandler
+          modalHideHandler: this.modalHideHandler,
+          loginHandler: this.loginHandler,
+          registerHandler: this.registerHandler
           }}>
 
         <Dark 

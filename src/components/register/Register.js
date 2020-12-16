@@ -6,7 +6,7 @@ import './register.scss';
 
 export const Register = () => {
 
-    const {renderInputs} = useContext(RateContext);
+    const {renderInputs, state, registerHandler} = useContext(RateContext);
 
     return(
         <Fragment>
@@ -14,7 +14,7 @@ export const Register = () => {
                 {renderInputs()}             
             </div>
             <div className = 'modalBtn'>
-                <Button text = 'Register' />
+                <Button text = 'Register' disabled = {!state.isFormValid} click = {registerHandler} />
             </div>
         </Fragment>
     );
