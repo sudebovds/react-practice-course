@@ -1,7 +1,6 @@
 import React, { Fragment, useContext } from 'react';
 import { RateContext } from '../../context/RateContext';
 import { Button } from '../button/Button';
-import { Input } from '../input/Input';
 import './register.scss';
 
 export const Register = () => {

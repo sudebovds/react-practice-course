@@ -7,7 +7,7 @@ import { RateContext } from '../../context/RateContext';
 
 const Header = () => {
 
-    const {state, modalShowHandler} = useContext(RateContext);
+    const {modalShowHandler} = useContext(RateContext);
 
     return (
         <header>
