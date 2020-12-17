@@ -47,6 +47,8 @@ export const Modal = () => {
                 <hr />
             </Fragment>
 
+            <h2 style = {{color: '#f01f30',  marginLeft: '.6vw'}}>{state.error}</h2>
+
             {
                 value === 'register' ? <Register /> :  <Login />
             }
